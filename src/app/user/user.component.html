@@ -1,0 +1,16 @@
+<main>
+
+<div class="row" *ngIf="userList[0]!=undefined">
+    <div class="col-lg-4 col-sm-4 col-md-4 mt-3" *ngFor="let user of userList[0].data">  
+        <div class="card" style="width: 85%;">
+            <img [src]="user.avatar" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+              <p class="card-text">{{user.email}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-paginator [rows]="6" [totalRecords]="12" (onPageChange)="paginate($event)"></p-paginator>
+</main>

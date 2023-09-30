@@ -1,0 +1,59 @@
+<main>
+<div class="heading">
+  <h5>Login Form</h5>
+</div>
+<div class="card">
+    <div class="card-body">
+      <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="Email-Id" class="form-control" formControlName="userEmail">
+            <div class="warning-message" *ngIf="LoginForm.get('userEmail').invalid && LoginForm.get('userEmail').touched">
+                <div *ngIf="LoginForm.get('userEmail').hasError('pattern')">
+                    Enter an email in correct format
+                </div>
+                <div *ngIf="LoginForm.get('userEmail').hasError('required')">
+                    Enter an email*
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password</label>
+            <input type="password" id="pwd" name="Password" class="form-control" formControlName="Password">
+            <div class="warning-message" *ngIf="LoginForm.get('Password').invalid && LoginForm.get('Password').touched">
+                <div *ngIf="LoginForm.get('Password').hasError('minlength') && LoginForm.get('Password').touched">
+                    The Minimum password length is 8
+                </div>
+                <div *ngIf="LoginForm.get('Password').hasError('required')">
+                    Please Enter a Password*
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <button class="btn btn-primary" type="submit" [disabled]="!LoginForm.valid" data-bs-toggle="modal" data-bs-target="#exampleModal">Login</button>
+            <!-- <button class="btn btn-primary" type="button"  (click)="switchMode()">Switch to {{isLoginMode?'Register':'Login'}}</button> -->
+        </div>
+      </form>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" *ngIf="errorMsg!=''">
+            {{errorMsg}}
+        </div>
+        <div class="modal-body" *ngIf="errorMsg==''">
+          You've Successfully Login
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary"data-bs-dismiss="modal" routerLink="/user" [disabled]="errorMsg!=''">Go to UserList</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
