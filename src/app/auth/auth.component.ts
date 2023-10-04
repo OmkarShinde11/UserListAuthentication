@@ -29,8 +29,10 @@ export class AuthComponent implements OnInit {
         console.log('Login Responce',resp);
         localStorage.setItem('User_token',JSON.stringify(resp));
         this.authService.user_token.next(resp);
+        this.LoginForm.reset();
       },error=>{
         this.errorMsg=error;
+        this.LoginForm.reset();
       });
   }
 
