@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   private LoginApiUrl='https://reqres.in/api/login';
   user_token=new BehaviorSubject(null);
+  token='';
   // private RegisterUrl='https://reqres.in/api/register';
   constructor(private http:HttpClient,private router:Router) { }
 
@@ -18,7 +19,10 @@ export class AuthService {
         email:userEmail,
         password:Password,
       }
-      ).pipe(catchError(this.handleError))
+      ).pipe(catchError(this.handleError),tap(resp=>{
+        this.token=resp['token'];
+        console.log(this.token);
+      }))
   }
 
   // register(userEmail,Password){
@@ -45,5 +49,23 @@ export class AuthService {
   AutoLogin(){
     let loaduser=JSON.parse(localStorage.getItem('User_token'));
     this.user_token.next(loaduser);
+    // this.token=loaduser.token
+  }
+  isAuthenticate(){
+    if(this.token!="" && this.token!=null){
+      return true
+    }
+    else{
+      return false
+    }
+  }
+
+  isAuthAuthenticate(){
+    if(this.token=="" || this.token==null){
+      return false
+    }
+    else{
+      return true
+    }
   }
 }

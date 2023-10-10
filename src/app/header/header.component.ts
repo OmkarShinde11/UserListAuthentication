@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../Service/auth.service';
 
 @Component({
@@ -8,11 +9,14 @@ import { AuthService } from '../Service/auth.service';
 })
 export class HeaderComponent implements OnInit {
   isAuthenticate;
-  constructor(private authService:AuthService) { }
+  constructor(private authService:AuthService,private router:Router) { }
 
-  ngOnInit(): void {
+  ngOnInit():void{
+    debugger
     this.authService.user_token.subscribe(resp=>{
-       this.isAuthenticate=resp?true:false
+       this.isAuthenticate=resp?true:false;
+       console.log(this.isAuthenticate);
+       this.router.navigate(['/user'])
     })
   }
 

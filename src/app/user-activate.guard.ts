@@ -20,6 +20,15 @@ export class UserActivateGuard implements CanActivate {
       }
       return this.router.createUrlTree(['/auth']);
     }))
+    // return new Promise((resolve,reject)=>{
+    //   if(this.authService.isAuthenticate()){
+    //     resolve(true);
+    //   }
+    //   else{
+    //     this.router.createUrlTree(['/auth']);
+    //     reject(false);
+    //   }
+    // })
   }
   
 }
